@@ -1,0 +1,21 @@
+---
+title: "My Project"
+author: "ABrunk"
+date: "December 27, 2018"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## My Map
+
+```{r cars, echo = FALSE, warning=FALSE,message=FALSE}
+library(leaflet)
+library(ggmap)
+myHP<-c(lat=42.167502,long=-87.7693)
+leaflet(myHP) %>% addTiles() %>%
+    addMarkers(lat=42.167502,lng=-87.7693,popup="Rosewood Beach")
+```
+
