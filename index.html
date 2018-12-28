@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Developing Data Products Presentation</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Developing Data Products Presentation">
+  <meta name="author" content="ABrunk">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Developing Data Products Presentation</h1>
+    <h2>Histogram of Random Data</h2>
+    <p>ABrunk<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Application Overview</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Sometimes, it is helpful to be able to generate a visual representation of a normal distribution using a set of chosen inputs.  This application allows the user to provide a set of inputs and then generates a chart illustrating how a set of normally distributed data would appear using that information.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Application Inputs</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The application takes in three inputs:</p>
+
+<ol>
+<li>The number of data points</li>
+<li>The mean value of the points in the distribution</li>
+<li>The standard deviation of the points in the distribution</li>
+</ol>
+
+<p>The N must be between 1 and 1000, while the mean and standard deviation must be between 0 and 1000.</p>
+
+<pre><code class="r">        numericInput(&#39;id_n&#39;,&#39;Number of Data Points&#39;,
+                     1,min=1,max=1000,step=1),
+        numericInput(&#39;id_mean&#39;,&#39;Mean Value&#39;,
+                     0,min=0,max=1000,step=1),
+        numericInput(&#39;id_sd&#39;,&#39;Standard Deviation&#39;,
+                     0,min=0,max=1000,step=1)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Application Calculations</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Once the data is entered, a set of normally distributed data is generated using the <code>rnorm</code> function as follows:</p>
+
+<pre><code class="r">my_data &lt;- reactive(rnorm(n=input$id_n,mean=input$id_mean,sd=input$id_sd))
+</code></pre>
+
+<p>For example, if we use <code>n = 20</code>, with a mean of <code>10</code> and a standard deviation of <code>2</code> then the data generated is as follows:</p>
+
+<pre><code>##  [1] 10.410334  9.273747  8.235966  9.476665  7.993627  9.393876  6.098810
+##  [8]  8.118646  7.146787  8.450686  7.663902 10.103214  9.526323 11.188671
+## [15]  6.156178 11.892337 10.688480 12.022548 14.177690 12.180959
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Application Output</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Finally, the app outputs a histogram of the data using the following server code:</p>
+
+<pre><code class="r">hist(my_data(),xlab=&#39;Numeric Value&#39;,ylab=&#39;Count of Data Points&#39;,col=&#39;red&#39;,main=&#39;Histogram&#39;)
+</code></pre>
+
+<p><img src="figure/unnamed-chunk-5-1.png" alt="plot of chunk unnamed-chunk-5"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Application Overview'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Application Inputs'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Application Calculations'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Application Output'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
